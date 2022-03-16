@@ -23,7 +23,7 @@ export async function searchLocation(term: string): Promise<WeatherLocation | un
 }
 
 export async function readWeather(locationId: number): Promise<Weather> {
-    const current = await fetch(`${server}/weather?id=${locationId}&${keyQuery}&units=metrics`)
+    const current = await fetch(`${server}/weather?id=${locationId}&${keyQuery}&units=metric`)
     if (current.status !== 200) throw new Error('Failed to read location data')
 
     return await current.json()

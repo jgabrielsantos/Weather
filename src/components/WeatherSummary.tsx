@@ -1,4 +1,4 @@
-import {FC, forwardRef, useEffect, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {WeatherLocation, Weather} from '../model/Weather'
 import WeatherEntry from './WeatherEntry'
 import { readForecast, readWeather } from '../services/WeatherService';

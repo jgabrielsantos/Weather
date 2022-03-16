@@ -10,11 +10,19 @@ function convertUnixTimeToDate(unixUtc: number): Date {
     return new Date(unixUtc * 1000)
 }
 
+function convertUnixTimeToLocalTime(unixUtc: number): string {
+    const date = convertUnixTimeToDate(unixUtc)
+    let hours = date.getHours()
+    let currentTime = hours + "h"
+
+    return currentTime
+}
+
 const WeatherEntry: FC<WeatherEntryProps> = ({weather}) => {
 
     return(
         <div>
-            <div>{convertUnixTimeToDate(weather.dt).toLocaleDateString()}</div>
+            <div>{convertUnixTimeToDate(weather.dt).toLocaleDateString()} at {convertUnixTimeToLocalTime(weather.dt)}</div>
             <div>
                 <strong>{weather.main.temp} ºC</strong>
                 <div>({weather.main.temp_min} ºC / {weather.main.temp_max}ºC)</div>

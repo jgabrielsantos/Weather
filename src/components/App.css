@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ol {
+    white-space: nowrap;
+    display: flex;
+    overflow: auto;
+}
+
+li {
+    border-right: 1px solid black;
+    padding: 10px;
+    list-style-type: none;
+    display: inline-block;
+}
+
+li:hover {
+    background: lightgray;
+}

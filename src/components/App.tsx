@@ -32,19 +32,23 @@ const App: FC = () => {
 
   return (
     <div className='container'>
-      <h1>Weather App</h1>
-      < LocationSearch onSearch={addLocation} />
+      <header>
+        <h1>Weather App</h1>
+        < LocationSearch onSearch={addLocation} />
+      </header>
 
       {error ? <div className={`alert alert-danger`}>{error}</div> : null}
       {warning ? <div className={`alert alert-danger`}>{warning}</div> : null }
 
-      < LocationTable
-        locations={locations}
-        current={currentLocation}
-        onSelect={location => setCurrentLocation(location)}
-      />
+      <div className="content">
+        < LocationTable
+          locations={locations}
+          current={currentLocation}
+          onSelect={location => setCurrentLocation(location)}
+        />
 
-      <WeatherSummary location={currentLocation} />
+        < WeatherSummary location={currentLocation} />
+      </div>
     </div>
   );
 }

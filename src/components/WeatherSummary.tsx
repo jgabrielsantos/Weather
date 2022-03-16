@@ -32,7 +32,6 @@ const WeatherSummary: FC<WeatherSummaryProps> = ({location}) => {
             <hr />
             <h2>{location.name}</h2>
             < WeatherEntry weather={weather} />
-
             <h2>Forecast</h2>
             <div>
                 <ol>

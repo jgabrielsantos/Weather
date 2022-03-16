@@ -13,7 +13,13 @@ function convertUnixTimeToDate(unixUtc: number): Date {
 function convertUnixTimeToLocalTime(unixUtc: number): string {
     const date = convertUnixTimeToDate(unixUtc)
     let hours = date.getHours()
-    let currentTime = hours + "h"
+    let minutes = date.getMinutes()
+    let currentTime
+    if (minutes > 0) {
+        currentTime = hours + "h : " + minutes
+    } else {
+        currentTime = hours + "h"
+    }
 
     return currentTime
 }

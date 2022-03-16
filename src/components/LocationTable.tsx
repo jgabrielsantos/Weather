@@ -9,7 +9,7 @@ interface LocationTableProps {
 
 const LocationTable: FC<LocationTableProps> = ({locations, onSelect, current}) => {
     return (
-        <div>
+        <div className='cityList'>
             <h2>Locations</h2>
             <table className='table table-hover'>
                 <thead>

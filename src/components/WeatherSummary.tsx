@@ -1,7 +1,7 @@
-import {FC, useEffect, useState} from 'react'
+import {FC, forwardRef, useEffect, useState} from 'react'
 import {WeatherLocation, Weather} from '../model/Weather'
 import WeatherEntry from './WeatherEntry'
-import { readWeather } from '../services/WeatherService';
+import { readForecast, readWeather } from '../services/WeatherService';
 
 
 interface WeatherSummaryProps {
@@ -10,20 +10,39 @@ interface WeatherSummaryProps {
 
 const WeatherSummary: FC<WeatherSummaryProps> = ({location}) => {
     const [weather, setWeather] = useState<Weather | null>(null)
+    const [forecast,setForecast] = useState<Weather[] | null>(null)
 
     useEffect(() => {
-        if(location) {
-            readWeather(location.id).then(weather => setWeather(weather))
-        }
+        (async function() {
+            if (location) {
+                const [weather, forecast] = await Promise.all([
+                    readWeather(location.id),
+                    readForecast(location.id)
+                ])
+                setWeather(weather)
+                setForecast(forecast)
+            }
+        })()
     }, [location])
 
-    if (!location || !weather) return null
+    if (!location || !weather || !forecast) return null
 
     return (
-        <div>
+        <div className='cityWeather'>
             <hr />
             <h2>{location.name}</h2>
             < WeatherEntry weather={weather} />
+
+            <h2>Forecast</h2>
+            <div>
+                <ol>
+                    {forecast.map(forecast => 
+                        <li key={forecast.dt}>
+                            < WeatherEntry weather={forecast} />
+                        </li>    
+                    )}
+                </ol>
+            </div>
         </div>
     )
 }

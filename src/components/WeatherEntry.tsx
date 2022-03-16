@@ -11,16 +11,13 @@ function convertUnixTimeToDate(unixUtc: number): Date {
 }
 
 const WeatherEntry: FC<WeatherEntryProps> = ({weather}) => {
-    const temp = Math.round(weather.main.temp - 273.15)
-    const temp_min = Math.round(weather.main.temp_min - 273.15)
-    const temp_max = Math.round(weather.main.temp_max - 273.15)
 
     return(
         <div>
             <div>{convertUnixTimeToDate(weather.dt).toLocaleDateString()}</div>
             <div>
-                <strong>{temp} ºC</strong>
-                <div>({temp_min} ºC / {temp_max}ºC)</div>
+                <strong>{weather.main.temp} ºC</strong>
+                <div>({weather.main.temp_min} ºC / {weather.main.temp_max}ºC)</div>
             </div>
             <div>Humidity: {weather.main.humidity}%</div>
             {weather.weather.map(condition => 
